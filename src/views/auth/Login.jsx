@@ -39,14 +39,14 @@ const LoginPage = () => {
     if (successMessage) {
         toast.success(successMessage)
         dispatch(messageClear())  
-        navigate('/home')
+        navigate('/')
     } 
     if (errorMessage) {
         toast.error(errorMessage)
         dispatch(messageClear())  
     } 
     if (userInfo) {
-        navigate('/home')
+        navigate('/')
     }
 },[successMessage,errorMessage])
 

@@ -5,9 +5,14 @@ import {
   increaseQuantity,
   decreaseQuantity,
 } from "../store/reducers/cartReducer";
+import { isAuthenticated } from "../utils/auth";
+import { useNavigate } from 'react-router-dom';
+ 
 
 const ProductSlider = ({ products = [] }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   const getItemQuantity = (id) => {
@@ -44,8 +49,14 @@ const ProductSlider = ({ products = [] }) => {
                   {/* Conditional Rendering */}
                   {quantity === 0 ? (
                     <button
-                      className="mt-3 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm transition-transform transform hover:scale-105"
-                      onClick={() => dispatch(addToCart(product))}
+                      className="mt-3 w-full bg-green-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm transition-transform transform hover:scale-105"
+                      onClick={() =>  {
+                        if (!isAuthenticated()) {
+                          navigate("/login");
+                        } else {
+                          dispatch(addToCart(product));
+                        }
+                      }}
                     >
                       Add to Cart
                     </button>

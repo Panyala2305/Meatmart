@@ -9,7 +9,6 @@ const Home = () =>{
         <div className="w-full">
             <Header/>
             <Products/>
-            <MobProductSlider/>
             <MobileCartBar/> 
         </div>
     )

@@ -5,9 +5,12 @@ import {
   increaseQuantity,
   decreaseQuantity,
 } from "../store/reducers/cartReducer";
+import { isAuthenticated } from "../utils/auth";
+import { useNavigate } from 'react-router-dom';
 
 const MobProductSlider = ({ products = [] }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   const getItemQuantity = (id) => {
@@ -16,11 +19,11 @@ const MobProductSlider = ({ products = [] }) => {
   };
 
   return (
-    <div className="w-full py-6 container m-auto">
-      <h2 className="text-2xl font-semibold mb-4 px-4">Newly Added</h2>
+    <div className="w-full  py-6 container m-auto">
+      <h2 className="text-2xl font-semibold mb-4 px-4">Chicken items</h2>
 
       {/* Grid layout for responsiveness */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-4">
         {products.map((product, index) => {
           const quantity = getItemQuantity(product.id);
 
@@ -47,7 +50,13 @@ const MobProductSlider = ({ products = [] }) => {
                 {quantity === 0 ? (
                   <button
                     className="mt-3 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm transition-transform transform hover:scale-105"
-                    onClick={() => dispatch(addToCart(product))}
+                    onClick={() => {
+                                            if (!isAuthenticated()) {
+                                              navigate("/login");
+                                            } else {
+                                              dispatch(addToCart(product));
+                                            }
+                                          }}
                   >
                     Add to Cart
                   </button>

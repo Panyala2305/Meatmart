@@ -19,7 +19,7 @@ const MobileCartBar = () => {
         onClick={() => navigate("/cart")}
         className="bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-2 rounded-lg transition duration-300"
       >
-        View Cart
+        Order now
       </button>
     </div>
   );
