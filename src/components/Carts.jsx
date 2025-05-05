@@ -33,7 +33,7 @@ const Cart = () => {
 
     try {
       // Create Razorpay order on backend
-      const { data } = await axios.post("http://localhost:5000/api/payment/create-order", {
+      const { data } = await axios.post("https://api2.akash-building.space/api/payment/create-order", {
         amount: amount,
       });
 
@@ -53,7 +53,7 @@ const Cart = () => {
           try {
             // Send order data to backend
             await axios.post(
-              "http://localhost:5000/api/createorder",
+              "https://api2.akash-building.space/api/createorder",
               {
                 items: cartItems,
                 totalAmount: amount,
